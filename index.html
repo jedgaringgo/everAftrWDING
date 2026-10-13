@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#b85c7a">
+  <title>EverAfter | Wedding Service Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="EverAfter home">
+      <span class="brand-mark">♡</span>
+      <span>EverAfter<small>WEDDING SERVICE MANAGEMENT</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+      <a href="#home" data-screen="home">Home</a>
+      <a href="#services" data-screen="services">Services</a>
+      <a href="#booking" data-screen="booking">Booking</a>
+      <a href="#contact" data-screen="contact">Contact</a>
+      <button class="nav-admin" id="adminNavButton" type="button">Admin</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="screen hero-screen">
+      <div class="hero-copy">
+        <p class="eyebrow">YOUR LOVE STORY, BEAUTIFULLY PLANNED</p>
+        <h1>Every love story deserves an <em>ever after.</em></h1>
+        <p class="hero-description">From the first little detail to your once-in-a-lifetime “I do,” let us help you plan a wedding that feels like you.</p>
+        <div class="hero-actions">
+          <button class="button button-primary" type="button" data-go="services">Explore our services →</button>
+          <button class="button button-outline" type="button" data-go="booking">Book a consultation</button>
+        </div>
+        <div class="hero-note"><span class="heart-dot">♡</span><span>Thoughtful planning. Meaningful moments. Beautiful memories.</span></div>
+      </div>
+      <div class="hero-image-wrap">
+        <img class="hero-image" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1300&q=85" alt="Romantic outdoor wedding ceremony">
+        <div class="image-caption"><span>✦</span><div><strong>Your day, your way</strong><small>Made with love, just for you</small></div></div>
+      </div>
+    </section>
+
+    <section id="services" class="screen section services-screen" hidden>
+      <div class="section-heading">
+        <p class="eyebrow">MADE FOR YOUR MOMENT</p>
+        <h2 class="section-title">Wedding services <em>with heart</em></h2>
+        <p class="section-intro">Choose a service to explore packages and options made to bring your dream celebration to life.</p>
+      </div>
+      <div class="service-grid">
+        <button class="service-card" type="button" data-service="venue">
+          <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=80" alt="Wedding venue">
+          <span class="service-card-copy"><span class="service-number">01 / VENUE</span><strong>Venue & Reception</strong><span>Find the perfect place for your beginning.</span><b>Explore options ↗</b></span>
+        </button>
+        <button class="service-card" type="button" data-service="catering">
+          <img src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=900&q=80" alt="Wedding catering table">
+          <span class="service-card-copy"><span class="service-number">02 / CATERING</span><strong>Food & Catering</strong><span>A delicious celebration shared with loved ones.</span><b>Explore options ↗</b></span>
+        </button>
+        <button class="service-card" type="button" data-service="decoration">
+          <img src="https://th.bing.com/th/id/OIP.wN94cpu2PDkRE0KgOvqI0QHaMj?w=184&h=313&c=7&r=0&o=7&pid=1.7&rm=3" alt="Wedding floral decorations">
+          <span class="service-card-copy"><span class="service-number">03 / DECOR</span><strong>Flowers & Styling</strong><span>Romantic details that reflect your style.</span><b>Explore options ↗</b></span>
+        </button>
+        <button class="service-card" type="button" data-service="photography">
+          <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=900&q=80" alt="Wedding couple photography">
+          <span class="service-card-copy"><span class="service-number">04 / MEMORIES</span><strong>Photo & Video</strong><span>Keep the moments you will treasure forever.</span><b>Explore options ↗</b></span>
+        </button>
+      </div>
+      <div class="center-action"><button class="button button-primary" type="button" data-go="booking">Plan my wedding ♡</button></div>
+    </section>
+
+    <section id="serviceGallery" class="screen section gallery-section" hidden>
+      <button id="backToServices" class="button button-light back-button" type="button">← Back to Services</button>
+      <p class="eyebrow">EXPLORE YOUR OPTIONS</p>
+      <h2 id="galleryTitle" class="section-title">Wedding Options</h2>
+      <p id="galleryDescription" class="section-intro"></p>
+      <div id="optionsContainer" class="option-grid"></div>
+    </section>
+
+    <section id="booking" class="screen section booking-screen" hidden>
+      <div class="section-heading">
+        <p class="eyebrow">LET'S MAKE IT OFFICIAL</p>
+        <h2 class="section-title">Start your <em>forever</em></h2>
+        <p class="section-intro">Tell us a little about your plans. We'll use your details to prepare for your consultation.</p>
+      </div>
+      <div class="booking-layout">
+        <aside class="booking-aside">
+          <span class="aside-heart">♡</span>
+          <h3>A beautiful day begins with a simple hello.</h3>
+          <p>Share your date, your ideas, and what matters most to you. We'll take it from there together.</p>
+          <div class="aside-detail"><span>✉</span><span><b>Email</b><br>everafterjrrmb@gmail.com</span></div>
+          <div class="aside-detail"><span>♡</span><span><b>Personalized planning</b><br>Made around your love story</span></div>
+        </aside>
+        <form id="bookingForm" class="booking-form">
+          <div class="form-row">
+            <label for="clientName">Full name *</label>
+            <input id="clientName" name="client_name" type="text" placeholder="Enter your full name" required maxlength="120">
+          </div>
+          <div class="form-row two-columns">
+            <div><label for="email">Email address *</label><input id="email" name="email" type="email" placeholder="you@example.com" required maxlength="254"></div>
+            <div><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" placeholder="09xx xxx xxxx" maxlength="40"></div>
+          </div>
+          <div class="form-row two-columns">
+            <div><label for="weddingDate">Wedding date *</label><input id="weddingDate" name="wedding_date" type="date" required></div>
+            <div>
+              <label for="service">Service *</label>
+              <select id="service" name="service" required>
+                <option value="">Choose a service</option>
+                <option value="Venue & Reception">Venue & Reception</option>
+                <option value="Food & Catering">Food & Catering</option>
+                <option value="Flowers & Styling">Flowers & Styling</option>
+                <option value="Photo & Video">Photo & Video</option>
+                <option value="Complete Wedding Package">Complete Wedding Package</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row"><label for="selectedOption">Selected package / option</label><input id="selectedOption" name="selected_option" type="text" placeholder="Choose an option from our services (optional)" maxlength="180"></div>
+          <div class="form-row"><label for="message">Tell us about your dream wedding</label><textarea id="message" name="message" rows="4" placeholder="Theme, guest count, budget, or anything you'd like us to know..." maxlength="3000"></textarea></div>
+          <p class="form-note">Fields marked * are required. Sending this form requests a booking; it does not confirm a reservation.</p>
+          <button class="button button-primary button-full" type="submit" id="submitBooking">Send booking request ♡</button>
+          <p id="bookingStatus" class="status-message" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="contact" class="screen section contact-screen" hidden>
+      <div class="contact-card">
+        <p class="eyebrow">WE'D LOVE TO HEAR FROM YOU</p>
+        <h2 class="section-title">Let's create something <em>beautiful.</em></h2>
+        <p class="section-intro">Have questions or still figuring out your plans? Get in touch and let's talk about your special day.</p>
+        <button class="button button-primary" type="button" data-go="booking">Contact us about your wedding</button>
+        <div class="contact-details">
+          <div><span>✉</span><b>Email</b><p>everAfter@gmail.com</p></div>
+          <div><span>♡</span><b>Our promise</b><p>We promise to provide personal, thoughtful, and reliable wedding services, making every couple feel special while bringing their dream wedding to life with love and care. 💗</p></div>
+          <div><span>✧</span><b>Our focus</b><p>Your story, your celebration</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="adminPanel" class="screen section admin-screen" hidden>
+      <div class="section-heading">
+        <p class="eyebrow">PRIVATE WORKSPACE</p>
+        <h2 class="section-title">Booking <em>dashboard</em></h2>
+        <p class="section-intro">Sign in with an authorized Supabase account to review submitted booking requests.</p>
+      </div>
+      <div id="adminLoginBox" class="admin-login-box">
+        <form id="adminLoginForm" class="admin-login-form">
+          <label for="adminEmail">Admin email</label>
+          <input id="adminEmail" type="email" autocomplete="username" required placeholder="admin@example.com">
+          <label for="adminPassword">Password</label>
+          <input id="adminPassword" type="password" autocomplete="current-password" required placeholder="Your password">
+          <button class="button button-primary" type="submit">Sign in</button>
+          <p id="adminLoginStatus" class="status-message" role="status"></p>
+        </form>
+      </div>
+      <div id="adminDashboard" hidden>
+        <div class="admin-toolbar"><p id="adminWelcome"></p><div><button id="refreshBookings" class="button button-light" type="button">Refresh</button> <button id="adminSignOut" class="button button-outline" type="button">Sign out</button></div></div>
+        <p id="adminStatus" class="status-message" role="status"></p>
+        <div class="table-wrap">
+          <table class="booking-table">
+            <thead><tr><th>Client</th><th>Wedding date</th><th>Service</th><th>Contact</th><th>Message / option</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="bookingsTableBody"><tr><td colspan="7">Sign in to load bookings.</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#home"><span class="brand-mark">♡</span><span>EverAfter<small>WEDDING SERVICE MANAGEMENT</small></span></a>
+    <p>Made with love for your happily ever after.</p>
+    <p>© <span id="currentYear"></span> EverAfter. All rights reserved.</p>
+  </footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
